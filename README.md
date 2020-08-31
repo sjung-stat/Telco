@@ -9,7 +9,7 @@ According to [this article](https://www.bizjournals.com/albany/news/2019/04/11/n
 
 The goal of this proejct is to predict whether a Telco customer will churn or not using the Telco Customer Churn dataset provided by the [IBM Analytics Communities](https://www.kaggle.com/blastchar/telco-customer-churn). Before building a model, I cleaned the dataset to easily explore the dataset and visualized it. Then I built a logistic regression model for classification. 
 
-This is part of a group project where we introduce the concept of logistic regression and how logistic regression can be used in practice. This group is comprised of five graduate students. Our group made this [Youtube playlist](youtube.com/playlist?list=PLGmy0B-4mUItp8wku-Mil8iBGIp1u0JIV) for the project. I was in charge of data cleaning, EDA, and model building. You can find my portion [here](https://www.youtube.com/watch?v=d7LDoWV-xjk&list=PLGmy0B-4mUItp8wku-Mil8iBGIp1u0JIV&index=5&t=0s). 
+This is part of a group project where we introduce the concept of logistic regression and how logistic regression can be used in practice. This group is comprised of five graduate students. Our group made this [Youtube playlist](https://www.youtube.com/playlist?list=PLGmy0B-4mUItp8wku-Mil8iBGIp1u0JIV) for the project. I was in charge of data cleaning, EDA, and model building. You can find my portion [here](https://www.youtube.com/watch?v=d7LDoWV-xjk&list=PLGmy0B-4mUItp8wku-Mil8iBGIp1u0JIV&index=5&t=0s). 
 
 
 -----
