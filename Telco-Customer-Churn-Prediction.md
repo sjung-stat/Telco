@@ -163,61 +163,40 @@ cleandata$TotalCharges <- NULL
 
 # 5 Exploratory Data Analysis
 
-EDA Barplot of Gender vs. Churn
 ![](README_figs/README-unnamed-chunk-9-1.png)<!-- -->
 
-EDA Barplot of SeniorCitizen vs. Churn
 ![](README_figs/README-unnamed-chunk-10-1.png)<!-- -->
 
-EDA Barplot of Partner vs. Churn
 ![](README_figs/README-unnamed-chunk-11-1.png)<!-- -->
 
-EDA Barplot of Dependents vs. Churn
 ![](README_figs/README-unnamed-chunk-12-1.png)<!-- -->
 
-EDA Barplot of PhoneService vs. Churn
 ![](README_figs/README-unnamed-chunk-13-1.png)<!-- -->
 
-EDA Barplot of MultipleLines vs. Churn
 ![](README_figs/README-unnamed-chunk-14-1.png)<!-- -->
 
-EDA Barplot of InternetService vs. Churn
 ![](README_figs/README-unnamed-chunk-15-1.png)<!-- -->
 
-EDA Barplot of OnlineSecurity vs. Churn
 ![](README_figs/README-unnamed-chunk-16-1.png)<!-- -->
 
-EDA Barplot of OnlineBackup vs. Churn
 ![](README_figs/README-unnamed-chunk-17-1.png)<!-- -->
 
-EDA Barplot of DeviceProtection vs. Churn
 ![](README_figs/README-unnamed-chunk-18-1.png)<!-- -->
 
-EDA Barplot of TechSupport vs. Churn
 ![](README_figs/README-unnamed-chunk-19-1.png)<!-- -->
 
-EDA Barplot of StreamingTV vs. Churn
 ![](README_figs/README-unnamed-chunk-20-1.png)<!-- -->
 
-EDA Barplot of StreamingMovies vs. Churn
 ![](README_figs/README-unnamed-chunk-21-1.png)<!-- -->
 
-EDA Barplot of Contract vs. Churn
 ![](README_figs/README-unnamed-chunk-22-1.png)<!-- -->
 
-EDA Barplot of PaperlessBilling vs. Churn
 ![](README_figs/README-unnamed-chunk-23-1.png)<!-- -->
 
-EDA Barplot of PaymentMethod vs. Churn
 ![](README_figs/README-unnamed-chunk-24-1.png)<!-- -->
-
-EDA Boxplot of Monthly Charges vs. Churn
-
-    ## Warning: `fun.y` is deprecated. Use `fun` instead.
 
 ![](README_figs/README-unnamed-chunk-25-1.png)<!-- -->
 
-EDA Barplot of Customer Tenure (Year)
 ![](README_figs/README-unnamed-chunk-26-1.png)<!-- -->
 
 -----
