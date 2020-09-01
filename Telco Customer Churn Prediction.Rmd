@@ -326,9 +326,10 @@ table(cleandata$Churn)/nrow(cleandata)  # Churn rate: 73.42%
 Split the dataset into training and test sets
 ```{r warning=FALSE}
 set.seed(12345)
-sample <- sample.split(cleandata, SplitRatio=0.7)
-train_data <- subset(cleandata, sample==TRUE)
-test_data <- subset(cleandata, sample==FALSE)
+sample_size <- floor(0.75 * nrow(cleandata))
+sampling_data <- sample(seq_len(nrow(cleandata)), size = sample_size)
+train_data <- cleandata[sampling_data, ]
+test_data <- cleandata[-sampling_data, ]
 ```
 
 ***
