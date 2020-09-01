@@ -31,32 +31,33 @@ data and develop focused customer retention programs.
 ***
 
 
-#2 Data
+# 2 Data
 
 Each row represents a customer, each column contains customer's attributes described on the column Metadata. 
 The raw data contains 7043 rows (customers) and 21 columns (features). The "Churn" column is our target.
-Description
-- **customerID:** Customer ID
-- **gender:** Customer gender (female, male)
-- **SeniorCitizen:** Whether the customer is a senior citizen or not (1,0)
-- **Partner:** Whether the customer has a partner or not (Yes, No)
-- **Dependents:** Whether the customer has dependents or not (Yes, No)
-- **tenure:** Number of months the customer has stayed with the company
-- **PhoneService:** Whether the customer has a phone service or not (Yes, No)
-- **MultipleLines:** Whether the customer has multiple lines or not (Yes, No, No phone service)
-- **InternetService:** Customer's internet service provider (DSL, Fiber optic, No)
-- **OnlineSecurity:** Whether the customer has online security or not (Yes, No, No internet service)
-- **OnlineBackup:** Whether the customer has online backup or not (Yes, No, No internet service)
-- **DeviceProtection:** Whether the customer has device protection or not (Yes, No, No internet service)
-- **TechSupport:** Whether the customer has tech support or not (Yes, No, No internet service)
-- **StreamingTV:** Whether the customer has streaming TV or not (Yes, No, No internet service)
-- **StreamingMovies:** Whether the customer has streaming movies or not (Yes, No, No internet service)
-- **Contract:** The contract term of the customer (Month-to-month, One year, Two year)
-- **PaperlessBilling:** Whether the customer has paperless billing or not (Yes, No)
-- **PaymentMethod:** The customer's payment method (Electronic check, Mailed check, Bank transfer (automatic), Credit card (automatic))
-- **MonthlyCharges:** The amount charged to the customer monthly
-- **TotalCharges:** The total amount charged to the customer
-- **Churn:** Whether the customer churned or not (Yes or No)
+
+
+* __customerID__: Customer ID
+* __gender__: Customer gender (female, male)
+* __SeniorCitizen__: Whether the customer is a senior citizen or not (1,0)
+* __Partner__: Whether the customer has a partner or not (Yes, No)
+* __Dependents__: Whether the customer has dependents or not (Yes, No)
+* __tenure__: Number of months the customer has stayed with the company
+* __PhoneService__: Whether the customer has a phone service or not (Yes, No)
+* __MultipleLines__: Whether the customer has multiple lines or not (Yes, No, No phone service)
+* __InternetService__: Customer's internet service provider (DSL, Fiber optic, No)
+* __OnlineSecurity__: Whether the customer has online security or not (Yes, No, No internet service)
+* __OnlineBackup__: Whether the customer has online backup or not (Yes, No, No internet service)
+* __DeviceProtection__: Whether the customer has device protection or not (Yes, No, No internet service)
+* __TechSupport__: Whether the customer has tech support or not (Yes, No, No internet service)
+* __StreamingTV__: Whether the customer has streaming TV or not (Yes, No, No internet service)
+* __StreamingMovies__: Whether the customer has streaming movies or not (Yes, No, No internet service)
+* __Contract__: The contract term of the customer (Month-to-month, One year, Two year)
+* __PaperlessBilling__: Whether the customer has paperless billing or not (Yes, No)
+* __PaymentMethod__: The customer's payment method (Electronic check, Mailed check, Bank transfer (automatic), Credit card (automatic))
+* __MonthlyCharges__: The amount charged to the customer monthly
+* __TotalCharges__: The total amount charged to the customer
+* __Churn__: Whether the customer churned or not (Yes or No)
 
 
 ***
@@ -129,7 +130,7 @@ cleandata$TotalCharges <- NULL
 # 5 Exploratory Data Analysis
 
 EDA Barplot of Gender vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF1 <- data.frame(cleandata$gender, cleandata$Churn)
 Category_Gender <- ggplot(subDF1, aes(cleandata$gender, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -137,8 +138,10 @@ Category_Gender <- ggplot(subDF1, aes(cleandata$gender, (..count..)/sum(..count.
 print(Category_Gender + labs(y="Proportion", x="Gender", title="Barplot of Gender vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```           
+
+
 EDA Barplot of SeniorCitizen vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF2 <- data.frame(cleandata$SeniorCitizen, cleandata$Churn)
 Category_SeniorCitizen <- ggplot(subDF2, aes(cleandata$SeniorCitizen, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -146,8 +149,10 @@ Category_SeniorCitizen <- ggplot(subDF2, aes(cleandata$SeniorCitizen, (..count..
 print(Category_SeniorCitizen + labs(y="Proportion", x="Senior Citizen", title="Barplot of Senior Citizen vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of Partner vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF3 <- data.frame(cleandata$Partner, cleandata$Churn)
 Category_Partner <- ggplot(subDF3, aes(cleandata$Partner, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -155,8 +160,10 @@ Category_Partner <- ggplot(subDF3, aes(cleandata$Partner, (..count..)/sum(..coun
 print(Category_Partner + labs(y="Proportion", x="Partner", title="Barplot of Partner vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of Dependents vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF4 <- data.frame(cleandata$Dependents, cleandata$Churn)
 Category_Dependents <- ggplot(subDF4, aes(cleandata$Dependents, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -164,8 +171,10 @@ Category_Dependents <- ggplot(subDF4, aes(cleandata$Dependents, (..count..)/sum(
 print(Category_Dependents + labs(y="Proportion", x="Dependents", title="Barplot of Dependents vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of PhoneService vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF5 <- data.frame(cleandata$PhoneService, cleandata$Churn)
 Category_PhoneService <- ggplot(subDF5, aes(cleandata$PhoneService, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -173,8 +182,10 @@ Category_PhoneService <- ggplot(subDF5, aes(cleandata$PhoneService, (..count..)/
 print(Category_PhoneService + labs(y="Proportion", x="Phone Service", title="Barplot of Phone Service vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of MultipleLines vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF6 <- data.frame(cleandata$MultipleLines, cleandata$Churn)
 Category_MultipleLines <- ggplot(subDF6, aes(cleandata$MultipleLines, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -182,8 +193,10 @@ Category_MultipleLines <- ggplot(subDF6, aes(cleandata$MultipleLines, (..count..
 print(Category_MultipleLines + labs(y="Proportion", x="Multiple Lines", title="Barplot of Multiple Lines vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of InternetService vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF7 <- data.frame(cleandata$InternetService, cleandata$Churn)
 Category_InternetService <- ggplot(subDF7, aes(cleandata$InternetService, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -191,8 +204,10 @@ Category_InternetService <- ggplot(subDF7, aes(cleandata$InternetService, (..cou
 print(Category_InternetService + labs(y="Proportion", x="Internet Service", title="Barplot of Internet Service vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of OnlineSecurity vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF8 <- data.frame(cleandata$OnlineSecurity, cleandata$Churn)
 Category_OnlineSecurity <- ggplot(subDF8, aes(cleandata$OnlineSecurity, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -200,8 +215,10 @@ Category_OnlineSecurity <- ggplot(subDF8, aes(cleandata$OnlineSecurity, (..count
 print(Category_OnlineSecurity + labs(y="Proportion", x="Online Security", title="Barplot of Online Security vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of OnlineBackup vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF9 <- data.frame(cleandata$OnlineBackup, cleandata$Churn)
 Category_OnlineBackup <- ggplot(subDF9, aes(cleandata$OnlineBackup, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -209,8 +226,10 @@ Category_OnlineBackup <- ggplot(subDF9, aes(cleandata$OnlineBackup, (..count..)/
 print(Category_OnlineBackup + labs(y="Proportion", x="Online Backup", title="Barplot of Online Backup vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of DeviceProtection vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF10 <- data.frame(cleandata$DeviceProtection, cleandata$Churn)
 Category_DeviceProtection <- ggplot(subDF10, aes(cleandata$DeviceProtection, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -218,8 +237,10 @@ Category_DeviceProtection <- ggplot(subDF10, aes(cleandata$DeviceProtection, (..
 print(Category_DeviceProtection + labs(y="Proportion", x="Device Protection", title="Barplot of Device Protection vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of TechSupport vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF11 <- data.frame(cleandata$TechSupport, cleandata$Churn)
 Category_TechSupport <- ggplot(subDF11, aes(cleandata$TechSupport, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -227,8 +248,10 @@ Category_TechSupport <- ggplot(subDF11, aes(cleandata$TechSupport, (..count..)/s
 print(Category_TechSupport + labs(y="Proportion", x="Tech Support", title="Barplot of Tech Support vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of StreamingTV vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF12 <- data.frame(cleandata$StreamingTV, cleandata$Churn)
 Category_StreamingTV <- ggplot(subDF12, aes(cleandata$StreamingTV, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -236,8 +259,10 @@ Category_StreamingTV <- ggplot(subDF12, aes(cleandata$StreamingTV, (..count..)/s
 print(Category_StreamingTV + labs(y="Proportion", x="Streaming TV", title="Barplot of Streaming TV vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of StreamingMovies vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF13 <- data.frame(cleandata$StreamingMovies, cleandata$Churn)
 Category_StreamingMovies <- ggplot(subDF13, aes(cleandata$StreamingMovies, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -245,8 +270,10 @@ Category_StreamingMovies <- ggplot(subDF13, aes(cleandata$StreamingMovies, (..co
 print(Category_StreamingMovies + labs(y="Proportion", x="Streaming Movies", title="Barplot of Streaming Movies vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of Contract vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF14 <- data.frame(cleandata$Contract, cleandata$Churn)
 Category_Contract <- ggplot(subDF14, aes(cleandata$Contract, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -254,8 +281,10 @@ Category_Contract <- ggplot(subDF14, aes(cleandata$Contract, (..count..)/sum(..c
 print(Category_Contract + labs(y="Proportion", x="Contract", title="Barplot of Contract vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of PaperlessBilling vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF15 <- data.frame(cleandata$PaperlessBilling, cleandata$Churn)
 Category_PaperlessBilling <- ggplot(subDF15, aes(cleandata$PaperlessBilling, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -263,8 +292,10 @@ Category_PaperlessBilling <- ggplot(subDF15, aes(cleandata$PaperlessBilling, (..
 print(Category_PaperlessBilling + labs(y="Proportion", x="Paperless Billing", title="Barplot of Paperless Billing vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Barplot of PaymentMethod vs. Churn
-```{r}
+```{r, echo=FALSE}
 subDF16 <- data.frame(cleandata$PaymentMethod, cleandata$Churn)
 Category_PaymentMethod <- ggplot(subDF16, aes(cleandata$PaymentMethod, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -272,8 +303,10 @@ Category_PaymentMethod <- ggplot(subDF16, aes(cleandata$PaymentMethod, (..count.
 print(Category_PaymentMethod + labs(y="Proportion", x="Payment Method", title="Barplot of Payment Method vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
+
 EDA Boxplot of Monthly Charges vs. Churn
-```{r}
+```{r, echo=FALSE}
 means <- aggregate(MonthlyCharges ~ Churn, cleandata, mean)
 Category_Monthly <- ggplot(data=cleandata, aes(x=Churn, y=MonthlyCharges, fill=Churn)) + geom_boxplot() + 
      stat_summary(fun.y=mean, geom="point", shape=15, size=2) +
@@ -281,8 +314,10 @@ Category_Monthly <- ggplot(data=cleandata, aes(x=Churn, y=MonthlyCharges, fill=C
      theme(plot.title = element_text(hjust = 0.5))
 print(Category_Monthly + labs(y="Monthly Charges ($)", title="Boxplot of Monthly Charges vs. Churn"))
 ```
+
+
 EDA Barplot of Customer Tenure (Year)
-```{r}
+```{r, echo=FALSE}
 Category_Year <- ggplot(data = cleandata, aes(Year, fill=Year)) + 
      geom_bar(fill="steelblue") +
      geom_text(stat='count', aes(label=..count..), vjust=1.6, color="white", size=3.5) +
