@@ -179,41 +179,49 @@ cleandata$TotalCharges <- NULL
 
 # 5 Exploratory Data Analysis
 
-![](README_figs/README-unnamed-chunk-9-1.png)<!-- --> We can easily see
-that the proportions of churning by gender are almost equal. Both 37% of
-males and females do not churn.
+![](README_figs/README-unnamed-chunk-9-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-10-1.png)<!-- --> Also, the plot
-shows us that when a customer is not a senior citizen, the churn rate is
-very much high. We can interpret this trend this way: the younger
-customers are always actively looking for better mobile services and are
-ready to use other telcom companies, but this telecom company is not
-providing them good services.
+We can easily see that the proportions of churning by gender are almost
+equal. Both 37% of males and females do not churn.
 
-![](README_figs/README-unnamed-chunk-11-1.png)<!-- --> This is quite
-similar to that of the first plot, Gender vs. Churn. But the churn rate
-is a little higher for those who do not have partners.
+![](README_figs/README-unnamed-chunk-10-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-12-1.png)<!-- --> This plot tells
-us that when a customer has dependents, they have churn ratio of 1:5
-(out of 6 customers, only 1 person churns).
+Also, the plot shows us that when a customer is not a senior citizen,
+the churn rate is very much high. We can interpret this trend this way:
+the younger customers are always actively looking for better mobile
+services and are ready to use other telcom companies, but this telecom
+company is not providing them good services.
 
-![](README_figs/README-unnamed-chunk-13-1.png)<!-- --> We can observe
-that the ratio of churning by the two groups are similar. However, we
-can also see that the total number of customers who have phone service
-is a lot higher than the number of customers who do not have.
+![](README_figs/README-unnamed-chunk-11-1.png)<!-- -->
+
+This is quite similar to that of the first plot, Gender vs. Churn. But
+the churn rate is a little higher for those who do not have partners.
+
+![](README_figs/README-unnamed-chunk-12-1.png)<!-- -->
+
+This plot tells us that when a customer has dependents, they have churn
+ratio of 1:5 (out of 6 customers, only 1 person churns).
+
+![](README_figs/README-unnamed-chunk-13-1.png)<!-- -->
+
+We can observe that the ratio of churning by the two groups are similar.
+However, we can also see that the total number of customers who have
+phone service is a lot higher than the number of customers who do not
+have.
 
 ![](README_figs/README-unnamed-chunk-14-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-15-1.png)<!-- --> Interestingly,
-when a customer uses fiber optic as their internet service, the
-proportion of churning is very high, whereas the proportion is
-significantly lower when a customer uses neither DSL nor fiber optic.
+![](README_figs/README-unnamed-chunk-15-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-16-1.png)<!-- --> As Internet
-Service vs. Churn, this plot is showing a similar pattern. The
-proportion of churning when a customer does not have online security is
-very high.
+Interestingly, when a customer uses fiber optic as their internet
+service, the proportion of churning is very high, whereas the proportion
+is significantly lower when a customer uses neither DSL nor fiber optic.
+
+![](README_figs/README-unnamed-chunk-16-1.png)<!-- -->
+
+As Internet Service vs. Churn, this plot is showing a similar pattern.
+The proportion of churning when a customer does not have online security
+is very high.
 
 ![](README_figs/README-unnamed-chunk-17-1.png)<!-- -->
 
@@ -225,33 +233,38 @@ very high.
 
 ![](README_figs/README-unnamed-chunk-21-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-22-1.png)<!-- --> The longer
-contract term they have, they are less likely to churn. It might be due
-to cancellation fee they will have to pay when they cancel their
-contract and churn.
+![](README_figs/README-unnamed-chunk-22-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-23-1.png)<!-- --> We can suspect
-that relatively older customers tend to prefer paper billing. And we saw
-earlier that senior citizens have much higher proportion of not
-churning.
+The longer contract term they have, they are less likely to churn. It
+might be due to cancellation fee they will have to pay when they cancel
+their contract and churn.
 
-![](README_figs/README-unnamed-chunk-24-1.png)<!-- --> Interestingly,
-customers whose payment method is electronic check have very high ratio
-of churning.
+![](README_figs/README-unnamed-chunk-23-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-25-1.png)<!-- --> One of customers’
-interest when choosing a service is the cost of the service. If it is
-relatively higher, they are likely to look for other more affordable
-services. We can see that customers who churn pay approximately $13 more
-for their services.
+We can suspect that relatively older customers tend to prefer paper
+billing. And we saw earlier that senior citizens have much higher
+proportion of not churning.
 
-![](README_figs/README-unnamed-chunk-26-1.png)<!-- --> We saw earlier
-that majority of customers use month-to-month contract rather than
-long-term commitment. Hence, 0-1 year of tenure has the highest
-proportion. And we can observe that the proportion of tenure starts to
-increase from 3-4 years of tenure. We can interpret that once customers
-has been using the service more than 3 years, they are likely to become
-long-term customers.
+![](README_figs/README-unnamed-chunk-24-1.png)<!-- -->
+
+Interestingly, customers whose payment method is electronic check have
+very high ratio of churning.
+
+![](README_figs/README-unnamed-chunk-25-1.png)<!-- -->
+
+One of customers’ interest when choosing a service is the cost of the
+service. If it is relatively higher, they are likely to look for other
+more affordable services. We can see that customers who churn pay
+approximately $13 more for their services.
+
+![](README_figs/README-unnamed-chunk-26-1.png)<!-- -->
+
+We saw earlier that majority of customers use month-to-month contract
+rather than long-term commitment. Hence, 0-1 year of tenure has the
+highest proportion. And we can observe that the proportion of tenure
+starts to increase from 3-4 years of tenure. We can interpret that once
+customers has been using the service more than 3 years, they are likely
+to become long-term customers.
 
 -----
 

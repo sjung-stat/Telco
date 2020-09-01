@@ -139,6 +139,7 @@ Category_Gender <- ggplot(subDF1, aes(cleandata$gender, (..count..)/sum(..count.
 print(Category_Gender + labs(y="Proportion", x="Gender", title="Barplot of Gender vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```           
+
 We can easily see that the proportions of churning by gender are almost equal. Both 37% of males and females do not churn. 
 
 
@@ -150,6 +151,7 @@ Category_SeniorCitizen <- ggplot(subDF2, aes(cleandata$SeniorCitizen, (..count..
 print(Category_SeniorCitizen + labs(y="Proportion", x="Senior Citizen", title="Barplot of Senior Citizen vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 Also, the plot shows us that when a customer is not a senior citizen, the churn rate is very much high. We can interpret this trend this way: the younger customers are always actively looking for better mobile services and are ready to use other telcom companies, but this telecom company is not providing them good services. 
 
 
@@ -162,6 +164,7 @@ Category_Partner <- ggplot(subDF3, aes(cleandata$Partner, (..count..)/sum(..coun
 print(Category_Partner + labs(y="Proportion", x="Partner", title="Barplot of Partner vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 This is quite similar to that of the first plot, Gender vs. Churn. But the churn rate is a little higher for those who do not have partners. 
 
 
@@ -174,6 +177,7 @@ Category_Dependents <- ggplot(subDF4, aes(cleandata$Dependents, (..count..)/sum(
 print(Category_Dependents + labs(y="Proportion", x="Dependents", title="Barplot of Dependents vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 This plot tells us that when a customer has dependents, they have churn ratio of 1:5 (out of 6 customers, only 1 person churns).
 
 
@@ -186,6 +190,7 @@ Category_PhoneService <- ggplot(subDF5, aes(cleandata$PhoneService, (..count..)/
 print(Category_PhoneService + labs(y="Proportion", x="Phone Service", title="Barplot of Phone Service vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 We can observe that the ratio of churning by the two groups are similar. However, we can also see that the total number of customers who have phone service is a lot higher than the number of customers who do not have. 
 
 
@@ -210,6 +215,7 @@ Category_InternetService <- ggplot(subDF7, aes(cleandata$InternetService, (..cou
 print(Category_InternetService + labs(y="Proportion", x="Internet Service", title="Barplot of Internet Service vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 Interestingly, when a customer uses fiber optic as their internet service, the proportion of churning is very high, whereas the proportion is significantly lower when a customer uses neither DSL nor fiber optic. 
 
 
@@ -222,6 +228,7 @@ Category_OnlineSecurity <- ggplot(subDF8, aes(cleandata$OnlineSecurity, (..count
 print(Category_OnlineSecurity + labs(y="Proportion", x="Online Security", title="Barplot of Online Security vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 As Internet Service vs. Churn, this plot is showing a similar pattern. The proportion of churning when a customer does not have online security is very high. 
 
 
@@ -287,6 +294,7 @@ Category_Contract <- ggplot(subDF14, aes(cleandata$Contract, (..count..)/sum(..c
 print(Category_Contract + labs(y="Proportion", x="Contract", title="Barplot of Contract vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 The longer contract term they have, they are less likely to churn. It might be due to cancellation fee they will have to pay when they cancel their contract and churn.  
 
 
@@ -300,6 +308,7 @@ Category_PaperlessBilling <- ggplot(subDF15, aes(cleandata$PaperlessBilling, (..
 print(Category_PaperlessBilling + labs(y="Proportion", x="Paperless Billing", title="Barplot of Paperless Billing vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 We can suspect that relatively older customers tend to prefer paper billing. And we saw earlier that senior citizens have much higher proportion of not churning. 
 
 
@@ -313,6 +322,7 @@ Category_PaymentMethod <- ggplot(subDF16, aes(cleandata$PaymentMethod, (..count.
 print(Category_PaymentMethod + labs(y="Proportion", x="Payment Method", title="Barplot of Payment Method vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+
 Interestingly, customers whose payment method is electronic check have very high ratio of churning. 
 
 
@@ -325,6 +335,7 @@ Category_Monthly <- ggplot(data=cleandata, aes(x=Churn, y=MonthlyCharges, fill=C
      theme(plot.title = element_text(hjust = 0.5))
 print(Category_Monthly + labs(y="Monthly Charges ($)", title="Boxplot of Monthly Charges vs. Churn"))
 ```
+
 One of customers' interest when choosing a service is the cost of the service. If it is relatively higher, they are likely to look for other more affordable services. We can see that customers who churn pay approximately $13 more for their services. 
 
 
@@ -337,6 +348,7 @@ Category_Year <- ggplot(data = cleandata, aes(Year, fill=Year)) +
      theme(plot.title = element_text(hjust = 0.5))
 print(Category_Year + labs(x="Tenure (Year)", y="Count", title="Customer Tenure"))
 ```
+
 We saw earlier that majority of customers use month-to-month contract rather than long-term commitment. Hence, 0-1 year of tenure has the highest proportion. And we can observe that the proportion of tenure starts to increase from 3-4 years of tenure. We can interpret that once customers has been using the service more than 3 years, they are likely to become long-term customers.
 
 
