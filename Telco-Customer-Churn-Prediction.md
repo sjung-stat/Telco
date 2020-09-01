@@ -5,19 +5,30 @@ Seyoung Jung
 
 -----
 
-# 1 Objective
+# 1 Introduction
 
-Predict behavior to retain customers. You can analyze all relevant
-customer data and develop focused customer retention programs.
+No one can doubt that the key to success for businesses is to have a
+more solid and wider customer base. Therefore, their main interest in to
+have a better customer service for their existing and future customers.
+And this is absolutely more important to telecom companies such as AT\&T
+and Verizon, because the market is already saturated. Hence, they should
+first retain their customers not to lose to their competitors. To do so,
+they should understand customer behavior.
+
+The goal of this proejct is to predict whether a Telco customer will
+churn or not using the Telco Customer Churn dataset. Before building a
+model, I cleaned the dataset to easily explore the dataset and
+visualized it. Then I built a logistic regression model for
+classification.
 
 -----
 
 # 2 Data
 
-Each row represents a customer, each column contains customer’s
-attributes described on the column Metadata. The raw data contains 7043
-rows (customers) and 21 columns (features). The “Churn” column is our
-target.
+In this project, we will use telco customer dataset which is comprised
+of 7,043 customers and 21 features. Oour target feature is “Churn”. The
+description of the features described below are from
+[here](https://www.kaggle.com/blastchar/telco-customer-churn).
 
   - **customerID**: Customer ID
   - **gender**: Customer gender (female, male)
@@ -59,6 +70,9 @@ target.
 
 # 3 Packages
 
+Before we start exploring the dataset, let’s first load libraries we
+need for this project.
+
 ``` r
 library(readr)      # read_csv
 library(dplyr)      # glimpse, 
@@ -85,7 +99,8 @@ library(MASS)       # stepAIC
 
 # 4 Data Cleaning
 
-Load the dataset into R and get a glimpse of our data.
+Load the dataset into R and get a glimpse of our data to see how our
+dataset looks like.
 
 ``` r
 telcodata <- read_csv("telcodata.csv")
@@ -116,7 +131,8 @@ glimpse(telcodata)
     ## $ TotalCharges     <dbl> 29.85, 1889.50, 108.15, 1840.75, 151.65, 820.50, 1...
     ## $ Churn            <chr> "No", "No", "Yes", "No", "Yes", "Yes", "No", "No",...
 
-Check if there are missing data. We will delete the corresponding rows.
+And then let’s check if there are missing data. We will delete the
+corresponding rows.
 
 ``` r
 MVinfo <- apply(is.na(telcodata), 2, which)     # 11 missing data
@@ -163,21 +179,41 @@ cleandata$TotalCharges <- NULL
 
 # 5 Exploratory Data Analysis
 
-![](README_figs/README-unnamed-chunk-9-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-9-1.png)<!-- --> We can easily see
+that the proportions of churning by gender are almost equal. Both 37% of
+males and females do not churn.
 
-![](README_figs/README-unnamed-chunk-10-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-10-1.png)<!-- --> Also, the plot
+shows us that when a customer is not a senior citizen, the churn rate is
+very much high. We can interpret this trend this way: the younger
+customers are always actively looking for better mobile services and are
+ready to use other telcom companies, but this telecom company is not
+providing them good services.
 
-![](README_figs/README-unnamed-chunk-11-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-11-1.png)<!-- --> This is quite
+similar to that of the first plot, Gender vs. Churn. But the churn rate
+is a little higher for those who do not have partners.
 
-![](README_figs/README-unnamed-chunk-12-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-12-1.png)<!-- --> This plot tells
+us that when a customer has dependents, they have churn ratio of 1:5
+(out of 6 customers, only 1 person churns).
 
-![](README_figs/README-unnamed-chunk-13-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-13-1.png)<!-- --> We can observe
+that the ratio of churning by the two groups are similar. However, we
+can also see that the total number of customers who have phone service
+is a lot higher than the number of customers who do not have.
 
 ![](README_figs/README-unnamed-chunk-14-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-15-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-15-1.png)<!-- --> Interestingly,
+when a customer uses fiber optic as their internet service, the
+proportion of churning is very high, whereas the proportion is
+significantly lower when a customer uses neither DSL nor fiber optic.
 
-![](README_figs/README-unnamed-chunk-16-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-16-1.png)<!-- --> As Internet
+Service vs. Churn, this plot is showing a similar pattern. The
+proportion of churning when a customer does not have online security is
+very high.
 
 ![](README_figs/README-unnamed-chunk-17-1.png)<!-- -->
 
@@ -189,15 +225,33 @@ cleandata$TotalCharges <- NULL
 
 ![](README_figs/README-unnamed-chunk-21-1.png)<!-- -->
 
-![](README_figs/README-unnamed-chunk-22-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-22-1.png)<!-- --> The longer
+contract term they have, they are less likely to churn. It might be due
+to cancellation fee they will have to pay when they cancel their
+contract and churn.
 
-![](README_figs/README-unnamed-chunk-23-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-23-1.png)<!-- --> We can suspect
+that relatively older customers tend to prefer paper billing. And we saw
+earlier that senior citizens have much higher proportion of not
+churning.
 
-![](README_figs/README-unnamed-chunk-24-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-24-1.png)<!-- --> Interestingly,
+customers whose payment method is electronic check have very high ratio
+of churning.
 
-![](README_figs/README-unnamed-chunk-25-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-25-1.png)<!-- --> One of customers’
+interest when choosing a service is the cost of the service. If it is
+relatively higher, they are likely to look for other more affordable
+services. We can see that customers who churn pay approximately $13 more
+for their services.
 
-![](README_figs/README-unnamed-chunk-26-1.png)<!-- -->
+![](README_figs/README-unnamed-chunk-26-1.png)<!-- --> We saw earlier
+that majority of customers use month-to-month contract rather than
+long-term commitment. Hence, 0-1 year of tenure has the highest
+proportion. And we can observe that the proportion of tenure starts to
+increase from 3-4 years of tenure. We can interpret that once customers
+has been using the service more than 3 years, they are likely to become
+long-term customers.
 
 -----
 

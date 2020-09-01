@@ -23,19 +23,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-# 1 Objective
+# 1 Introduction
 
-Predict behavior to retain customers. You can analyze all relevant customer 
-data and develop focused customer retention programs.
+No one can doubt that the key to success for businesses is to have a more solid and wider customer base. Therefore, their main interest in to have a better customer service for their existing and future customers. And this is absolutely more important to telecom companies such as AT&T and Verizon, because the market is already saturated. Hence, they should first retain their customers not to lose to their competitors. To do so, they should understand customer behavior.
+
+The goal of this proejct is to predict whether a Telco customer will churn or not using the Telco Customer Churn dataset. Before building a model, I cleaned the dataset to easily explore the dataset and visualized it. Then I built a logistic regression model for classification. 
+
 
 ***
 
 
 # 2 Data
 
-Each row represents a customer, each column contains customer's attributes described on the column Metadata. 
-The raw data contains 7043 rows (customers) and 21 columns (features). The "Churn" column is our target.
-
+In this project, we will use telco customer dataset which is comprised of 7,043 customers and 21 features. Oour target feature is "Churn". The description of the features described below are from [here](https://www.kaggle.com/blastchar/telco-customer-churn).
 
 * __customerID__: Customer ID
 * __gender__: Customer gender (female, male)
@@ -64,6 +64,7 @@ The raw data contains 7043 rows (customers) and 21 columns (features). The "Chur
 
 # 3 Packages
 
+Before we start exploring the dataset, let's first load libraries we need for this project. 
 ```{r message=FALSE, results="hide"}
 library(readr)      # read_csv
 library(dplyr)      # glimpse, 
@@ -82,13 +83,13 @@ library(MASS)       # stepAIC
 
 # 4 Data Cleaning
 
-Load the dataset into R and get a glimpse of our data. 
+Load the dataset into R and get a glimpse of our data to see how our dataset looks like. 
 ```{r message=FALSE}
 telcodata <- read_csv("telcodata.csv")
 glimpse(telcodata)
 ```
 
-Check if there are missing data. We will delete the corresponding rows.
+And then let's check if there are missing data. We will delete the corresponding rows.
 ```{r}
 MVinfo <- apply(is.na(telcodata), 2, which)     # 11 missing data
 withoutMV <- telcodata[-MVinfo$TotalCharges, ]
@@ -129,7 +130,8 @@ cleandata$TotalCharges <- NULL
 
 # 5 Exploratory Data Analysis
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF1 <- data.frame(cleandata$gender, cleandata$Churn)
 Category_Gender <- ggplot(subDF1, aes(cleandata$gender, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -137,9 +139,10 @@ Category_Gender <- ggplot(subDF1, aes(cleandata$gender, (..count..)/sum(..count.
 print(Category_Gender + labs(y="Proportion", x="Gender", title="Barplot of Gender vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```           
+We can easily see that the proportions of churning by gender are almost equal. Both 37% of males and females do not churn. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF2 <- data.frame(cleandata$SeniorCitizen, cleandata$Churn)
 Category_SeniorCitizen <- ggplot(subDF2, aes(cleandata$SeniorCitizen, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -147,9 +150,11 @@ Category_SeniorCitizen <- ggplot(subDF2, aes(cleandata$SeniorCitizen, (..count..
 print(Category_SeniorCitizen + labs(y="Proportion", x="Senior Citizen", title="Barplot of Senior Citizen vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+Also, the plot shows us that when a customer is not a senior citizen, the churn rate is very much high. We can interpret this trend this way: the younger customers are always actively looking for better mobile services and are ready to use other telcom companies, but this telecom company is not providing them good services. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF3 <- data.frame(cleandata$Partner, cleandata$Churn)
 Category_Partner <- ggplot(subDF3, aes(cleandata$Partner, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -157,9 +162,11 @@ Category_Partner <- ggplot(subDF3, aes(cleandata$Partner, (..count..)/sum(..coun
 print(Category_Partner + labs(y="Proportion", x="Partner", title="Barplot of Partner vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+This is quite similar to that of the first plot, Gender vs. Churn. But the churn rate is a little higher for those who do not have partners. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF4 <- data.frame(cleandata$Dependents, cleandata$Churn)
 Category_Dependents <- ggplot(subDF4, aes(cleandata$Dependents, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -167,9 +174,11 @@ Category_Dependents <- ggplot(subDF4, aes(cleandata$Dependents, (..count..)/sum(
 print(Category_Dependents + labs(y="Proportion", x="Dependents", title="Barplot of Dependents vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+This plot tells us that when a customer has dependents, they have churn ratio of 1:5 (out of 6 customers, only 1 person churns).
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF5 <- data.frame(cleandata$PhoneService, cleandata$Churn)
 Category_PhoneService <- ggplot(subDF5, aes(cleandata$PhoneService, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -177,9 +186,11 @@ Category_PhoneService <- ggplot(subDF5, aes(cleandata$PhoneService, (..count..)/
 print(Category_PhoneService + labs(y="Proportion", x="Phone Service", title="Barplot of Phone Service vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+We can observe that the ratio of churning by the two groups are similar. However, we can also see that the total number of customers who have phone service is a lot higher than the number of customers who do not have. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF6 <- data.frame(cleandata$MultipleLines, cleandata$Churn)
 Category_MultipleLines <- ggplot(subDF6, aes(cleandata$MultipleLines, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -189,7 +200,9 @@ print(Category_MultipleLines + labs(y="Proportion", x="Multiple Lines", title="B
 ```
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF7 <- data.frame(cleandata$InternetService, cleandata$Churn)
 Category_InternetService <- ggplot(subDF7, aes(cleandata$InternetService, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -197,9 +210,11 @@ Category_InternetService <- ggplot(subDF7, aes(cleandata$InternetService, (..cou
 print(Category_InternetService + labs(y="Proportion", x="Internet Service", title="Barplot of Internet Service vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+Interestingly, when a customer uses fiber optic as their internet service, the proportion of churning is very high, whereas the proportion is significantly lower when a customer uses neither DSL nor fiber optic. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF8 <- data.frame(cleandata$OnlineSecurity, cleandata$Churn)
 Category_OnlineSecurity <- ggplot(subDF8, aes(cleandata$OnlineSecurity, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -207,9 +222,11 @@ Category_OnlineSecurity <- ggplot(subDF8, aes(cleandata$OnlineSecurity, (..count
 print(Category_OnlineSecurity + labs(y="Proportion", x="Online Security", title="Barplot of Online Security vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+As Internet Service vs. Churn, this plot is showing a similar pattern. The proportion of churning when a customer does not have online security is very high. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF9 <- data.frame(cleandata$OnlineBackup, cleandata$Churn)
 Category_OnlineBackup <- ggplot(subDF9, aes(cleandata$OnlineBackup, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -219,7 +236,8 @@ print(Category_OnlineBackup + labs(y="Proportion", x="Online Backup", title="Bar
 ```
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF10 <- data.frame(cleandata$DeviceProtection, cleandata$Churn)
 Category_DeviceProtection <- ggplot(subDF10, aes(cleandata$DeviceProtection, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -229,7 +247,9 @@ print(Category_DeviceProtection + labs(y="Proportion", x="Device Protection", ti
 ```
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF11 <- data.frame(cleandata$TechSupport, cleandata$Churn)
 Category_TechSupport <- ggplot(subDF11, aes(cleandata$TechSupport, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -239,7 +259,7 @@ print(Category_TechSupport + labs(y="Proportion", x="Tech Support", title="Barpl
 ```
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF12 <- data.frame(cleandata$StreamingTV, cleandata$Churn)
 Category_StreamingTV <- ggplot(subDF12, aes(cleandata$StreamingTV, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -249,7 +269,7 @@ print(Category_StreamingTV + labs(y="Proportion", x="Streaming TV", title="Barpl
 ```
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF13 <- data.frame(cleandata$StreamingMovies, cleandata$Churn)
 Category_StreamingMovies <- ggplot(subDF13, aes(cleandata$StreamingMovies, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -259,7 +279,7 @@ print(Category_StreamingMovies + labs(y="Proportion", x="Streaming Movies", titl
 ```
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF14 <- data.frame(cleandata$Contract, cleandata$Churn)
 Category_Contract <- ggplot(subDF14, aes(cleandata$Contract, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -267,9 +287,12 @@ Category_Contract <- ggplot(subDF14, aes(cleandata$Contract, (..count..)/sum(..c
 print(Category_Contract + labs(y="Proportion", x="Contract", title="Barplot of Contract vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+The longer contract term they have, they are less likely to churn. It might be due to cancellation fee they will have to pay when they cancel their contract and churn.  
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF15 <- data.frame(cleandata$PaperlessBilling, cleandata$Churn)
 Category_PaperlessBilling <- ggplot(subDF15, aes(cleandata$PaperlessBilling, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -277,9 +300,12 @@ Category_PaperlessBilling <- ggplot(subDF15, aes(cleandata$PaperlessBilling, (..
 print(Category_PaperlessBilling + labs(y="Proportion", x="Paperless Billing", title="Barplot of Paperless Billing vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+We can suspect that relatively older customers tend to prefer paper billing. And we saw earlier that senior citizens have much higher proportion of not churning. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 subDF16 <- data.frame(cleandata$PaymentMethod, cleandata$Churn)
 Category_PaymentMethod <- ggplot(subDF16, aes(cleandata$PaymentMethod, (..count..)/sum(..count..))) + 
      geom_bar(aes(fill=cleandata$Churn), position="dodge") + 
@@ -287,9 +313,11 @@ Category_PaymentMethod <- ggplot(subDF16, aes(cleandata$PaymentMethod, (..count.
 print(Category_PaymentMethod + labs(y="Proportion", x="Payment Method", title="Barplot of Payment Method vs. Churn") +
            scale_fill_discrete(name="Churn"))
 ```
+Interestingly, customers whose payment method is electronic check have very high ratio of churning. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 means <- aggregate(MonthlyCharges ~ Churn, cleandata, mean)
 Category_Monthly <- ggplot(data=cleandata, aes(x=Churn, y=MonthlyCharges, fill=Churn)) + geom_boxplot() + 
      stat_summary(fun.y=mean, geom="point", shape=15, size=2) +
@@ -297,9 +325,11 @@ Category_Monthly <- ggplot(data=cleandata, aes(x=Churn, y=MonthlyCharges, fill=C
      theme(plot.title = element_text(hjust = 0.5))
 print(Category_Monthly + labs(y="Monthly Charges ($)", title="Boxplot of Monthly Charges vs. Churn"))
 ```
+One of customers' interest when choosing a service is the cost of the service. If it is relatively higher, they are likely to look for other more affordable services. We can see that customers who churn pay approximately $13 more for their services. 
 
 
-```{r, message = FALSE, warning = FALSE, fig.height = 5, fig.width = 10, echo=FALSE}
+
+```{r, message = FALSE, warning = FALSE, fig.height = 3.5, fig.width = 10, echo=FALSE}
 Category_Year <- ggplot(data = cleandata, aes(Year, fill=Year)) + 
      geom_bar(fill="steelblue") +
      geom_text(stat='count', aes(label=..count..), vjust=1.6, color="white", size=3.5) +
@@ -307,6 +337,7 @@ Category_Year <- ggplot(data = cleandata, aes(Year, fill=Year)) +
      theme(plot.title = element_text(hjust = 0.5))
 print(Category_Year + labs(x="Tenure (Year)", y="Count", title="Customer Tenure"))
 ```
+We saw earlier that majority of customers use month-to-month contract rather than long-term commitment. Hence, 0-1 year of tenure has the highest proportion. And we can observe that the proportion of tenure starts to increase from 3-4 years of tenure. We can interpret that once customers has been using the service more than 3 years, they are likely to become long-term customers.
 
 
 ***
