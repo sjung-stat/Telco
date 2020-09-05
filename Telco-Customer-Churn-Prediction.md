@@ -15,7 +15,7 @@ and Verizon, because the market is already saturated. Hence, they should
 first retain their customers not to lose to their competitors. To do so,
 they should understand customer behavior.
 
-The goal of this proejct is to predict whether a Telco customer will
+The goal of this project is to predict whether a Telco customer will
 churn or not using the Telco Customer Churn dataset. Before building a
 model, I cleaned the dataset to easily explore the dataset and
 visualized it. Then I built a logistic regression model for
