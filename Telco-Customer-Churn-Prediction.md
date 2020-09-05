@@ -8,7 +8,7 @@ Seyoung Jung
 # 1 Introduction
 
 No one can doubt that the key to success for businesses is to have a
-more solid and wider customer base. Therefore, their main interest in to
+more solid and wider customer base. Therefore, their main interest is to
 have a better customer service for their existing and future customers.
 And this is absolutely more important to telecom companies such as AT\&T
 and Verizon, because the market is already saturated. Hence, they should
