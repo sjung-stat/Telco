@@ -67,12 +67,27 @@ threshold will be classified as positive, and vice versa.
 
 If we use a cutoff point of 0.5 and just guess without any statistical
 models, we will get roughly 73% right, because 73% of customers from our
-dataset churned. However, we will be approximately 80% correct if we use
-our second logistic regression model that has only selected features
-rather than using the entire given features. And this increased accuracy
-will help the Telco company predict whether a customer will churn or not
-more accurately, and this analysis will be helpful for them when they
-develop their business strategy to retain their customers.
+dataset churned.
+
+![](logregResult_1.png "Title")
+
+However, this logistic regression model, which contains all the features
+that the original dataset has, gives us 80.60% of accuracy.
+
+![](variableSelection.png "Title") However, if we perform StepAIC, we
+will have less variables and the model will go through a lighter
+computation. Originally, the first logistic regression was built based
+on 18 features. But StepAIC ignores 5 features and only use 13 features.
+
+![](logregResult.png "Title")
+
+And it gives us a slightly better result. Now, we will be approximately
+80.83% correct if we use our second logistic regression model that has
+only selected features rather than using the entire given features. And
+this increased accuracy will help the Telco company predict whether a
+customer will churn or not more accurately, and this analysis will be
+helpful for them when they develop their business strategy to retain
+their customers.
 
 -----
 
